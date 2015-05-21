@@ -9,7 +9,7 @@ import android.telephony.SmsMessage;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 
-public class SMSReceiver extends BroadcastReceiver {
+public class SmsReceiver extends BroadcastReceiver {
 
     public static final String SMS_EXTRA_NAME = "pdus";
     private CallbackContext callback_receive;
