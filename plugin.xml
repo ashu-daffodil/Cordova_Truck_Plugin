@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.vashishatashu.traqplugin"
+        version="0.3.0">
+
+    <name>TraqPlugin</name>
+    <description>Cordova Plugin for traq app</description>
+    <license>MIT</license>
+    <keywords>cordova,traq</keywords>
+    <repo>https://github.com/vashishatashu/Cordova_Traq_Plugin.git</repo>
+    <js-module src="www/traqplugin.js" name="traqplugin">
+        <clobbers target="traqplugin"/>
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="TraqPlugin">
+                <param name="android-package" value="com.vashishatashu.traqplugin.TraqPlugin"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+        </config-file>
+
+        <source-file src="src/android/TraqPlugin.java" target-dir="src/com/vashishatashu/traqplugin"/>
+        <source-file src="src/android/SmsReceiver.java" target-dir="src/com/vashishatashu/traqplugin"/>
+    </platform>
+
+</plugin>
