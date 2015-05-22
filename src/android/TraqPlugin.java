@@ -1,8 +1,8 @@
 package com.vashishatashu.traqplugin;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
+import android.telephony.TelephonyManager;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -12,7 +12,7 @@ import org.json.JSONException;
 
 public class TraqPlugin extends CordovaPlugin {
     public enum ActionType {
-        RECEIVE_SMS, STOP_RECEIVE_SMS;
+        RECEIVE_SMS, STOP_RECEIVE_SMS, IMEI
     }
 
     private SmsReceiver smsReceiver;
@@ -62,6 +62,15 @@ public class TraqPlugin extends CordovaPlugin {
                 this.callback_receive.sendPluginResult(pluginResult);
                 pluginResult = new PluginResult(PluginResult.Status.OK); // 2. Send result for the current context
                 callbackContext.sendPluginResult(pluginResult);
+
+                result = true;
+                break;
+            case IMEI:
+                Context context = cordova.getActivity().getApplicationContext();
+                TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                telephonyManager.getDeviceId();
+                String imeiVal = telephonyManager.getDeviceId();
+                callbackContext.success(imeiVal);
 
                 result = true;
                 break;
